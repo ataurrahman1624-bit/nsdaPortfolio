@@ -1,20 +1,29 @@
-function updateTime() {
-  const now = new Date();
-  const timeElement = document.getElementById("time");
-  if (timeElement) {
-    timeElement.innerText = now.toLocaleString();
-  }
+// Check the real time and date
+function updateDateTime() {
+  const date = new Date();
+  document.querySelector("#time").innerHTML = date.toLocaleString();
 }
+updateDateTime();
+setInterval(updateDateTime, 1000);
 
-// Update time immediately on load
-updateTime();
-// Update time every second
-setInterval(updateTime, 1000);
-function initMap() {
-      const loc = { lat: 40.712776, lng: -74.005974 };
-      const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 14,
-        center: loc,
-      });
-      new google.maps.Marker({ position: loc, map: map });
-    }
+// form validation
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+
+  e.preventDefault(); // Stop form from submitting
+
+  // Get input values
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let phone = document.getElementById("phone").value;
+  let address = document.getElementById("address").value;
+  let message = document.getElementById("message").value;
+
+  // Simple validation
+  if(name == "" || email == "" || phone == "" || address == "" || message == "") {
+    alert("Please fill all fields");
+  } else {
+    document.getElementById("contactForm").reset();
+    alert("Form submitted successfully!");
+  }
+
+});
